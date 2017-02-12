@@ -5,15 +5,89 @@
     android:id="@+id/activity_context"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ericwyn.groupmessagehelper.ContextActivity">
+
     <ListView
-        android:id="@+id/listview_context"
+        android:id="@+id/listview_contextActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#fff">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:background="#eee"/>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/chooseAllRelativeLayout_contextActivity">
+            <ImageView
+                android:id="@+id/cb_chooseAll_contextActivity"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/checkbox_uncheck"/>
+
+            <TextView
+                android:id="@+id/tv_haveChooseHihi_contextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/cb_chooseAll_contextActivity"
+                android:text="已选择："
+                android:textColor="#1e1e1e"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_numofContextChoose_contextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_haveChooseHihi_contextActivity"
+                android:text="18"
+                android:textColor="#1e1e1e"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_fenge_contextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_numofContextChoose_contextActivity"
+                android:text="/"
+                android:textColor="#1e1e1e"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_numofContext_contextActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_fenge_contextActivity"
+                android:text="64"
+                android:textColor="#1e1e1e"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+        <Button
+            android:id="@+id/btn_successsChoose_context"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:text="发送短信"/>
+    </RelativeLayout>
 </RelativeLayout>

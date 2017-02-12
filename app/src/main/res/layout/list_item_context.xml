@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/layout_list_item_context"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/cb_list_item_context"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/checkbox_uncheck"
+        />
 
     <TextView
         android:id="@+id/name_list_item_context"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/cb_list_item_context"
         android:text="陈重围"
-        android:textSize="28sp"/>
+        android:textSize="24sp"/>
 
     <TextView
         android:id="@+id/phone_list_item_context"
@@ -19,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:textSize="28sp"
-        android:text="13078428643"/>
+        android:layout_marginEnd="10dp"
+        android:text="13078428643"
+        android:textSize="24sp"/>
 </RelativeLayout>

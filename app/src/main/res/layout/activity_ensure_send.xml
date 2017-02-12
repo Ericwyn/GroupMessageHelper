@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ericwyn.groupmessagehelper.EnsureSendActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_ensure_send"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_ensureName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:textColor="#2e2e2e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送对象："
+                android:textSize="18sp"/>
+
+            <EditText
+                android:inputType="none"
+                android:id="@+id/et_ensureName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/et_ensureName"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="#eeeeee"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_ensureText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_ensureName"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:textColor="#2e2e2e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送示例："
+                android:textSize="18sp"/>
+
+            <EditText
+                android:inputType="none"
+                android:id="@+id/et_ensureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/et_ensureText"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="#eeeeee"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_below="@id/rl_ensureText"
+            android:id="@+id/tv_sendMoney"
+            android:text="PS:本次群发预计花费5元"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/ensureSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_sendMoney"
+            android:layout_centerHorizontal="true"
+            android:text="确认发送"/>
+    </RelativeLayout>
+
+</ScrollView>
