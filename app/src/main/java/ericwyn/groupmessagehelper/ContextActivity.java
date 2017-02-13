@@ -37,7 +37,6 @@ public class ContextActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_context);
-
         if (getIntent() != null) {
             EXCEL_PATH = getIntent().getStringExtra("PATH");
         }
@@ -52,7 +51,7 @@ public class ContextActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if(getChooseNameList().size()==0){
-                    Toast.makeText(ContextActivity.this,"你还为选择任何的联系人",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContextActivity.this,"你还未选择任何的联系人",Toast.LENGTH_SHORT).show();
                 }else {
                     Intent intent=new Intent(ContextActivity.this,SendMessageActivity.class);
                     startActivity(intent);

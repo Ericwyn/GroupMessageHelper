@@ -22,7 +22,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
-            android:text="已选择了10个联系人"
             android:textSize="18sp"/>
 
         <Button

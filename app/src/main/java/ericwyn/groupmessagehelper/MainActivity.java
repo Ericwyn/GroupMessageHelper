@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button choose_btn;
+    private TextView makerName;
+    private TextView issues;
     public final int FILE_SELECT_CODE=10086;
     public String EXCEL_PATH="";
     @Override
@@ -24,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+//        makerName=(TextView)findViewById(R.id.tv_makerName_main);
+        issues=(TextView)findViewById(R.id.tv_issues_main);
+
+        issues.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://github.com/Ericwyn/GroupMessageHelper/issues");
+                Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
+            }
+        });
+
     }
     private void showFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -45,18 +60,17 @@ public class MainActivity extends AppCompatActivity {
                     Uri uri = data.getData();
                     EXCEL_PATH = FileUtils.getPath(this, uri);
                     if(EXCEL_PATH.matches("^.*?\\.(xls)$")){
-                        Toast.makeText(MainActivity.this,"文件选择成功:\n"+EXCEL_PATH,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"通讯录读取成功",Toast.LENGTH_SHORT).show();
                         Bundle bundle=new Bundle();
                         bundle.putString("PATH",EXCEL_PATH);
                         Intent intent=new Intent(MainActivity.this,ContextActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }else if(EXCEL_PATH.matches("^.*?\\.(xlsx)$")){
-                        Toast.makeText(MainActivity.this,"请使用2003及以下版本的Excel表格:\n"+EXCEL_PATH,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"请使用2003及以下版本的Excel表格",Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(MainActivity.this,"文件选择错误:\n"+EXCEL_PATH,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"文件格式错误",Toast.LENGTH_SHORT).show();
                     }
-
                 }
                 break;
         }

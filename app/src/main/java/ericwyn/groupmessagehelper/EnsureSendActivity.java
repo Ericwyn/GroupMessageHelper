@@ -1,12 +1,19 @@
 package ericwyn.groupmessagehelper;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +25,7 @@ public class EnsureSendActivity extends AppCompatActivity {
     private TextView moneyGuesst;
     private Button ensureSend;
     private List<Map<String,Object>> list;
+    private final int REQUEST_CODE_ASK_CALL_SENSMS=10086;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +58,13 @@ public class EnsureSendActivity extends AppCompatActivity {
         ensureSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ensureSend();
+                Toast.makeText(EnsureSendActivity.this,"短信群发助手群发操作完毕",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent();
+                intent.setClassName("com.android.mms","com.android.mms.ui.ConversationList");
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -87,13 +101,48 @@ public class EnsureSendActivity extends AppCompatActivity {
             smsManager.sendTextMessage(phoneNumber, null, text, null, null);
         }
     }
+
     private void ensureSend(){
+        if(Build.VERSION.SDK_INT >= 23){
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+            if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},REQUEST_CODE_ASK_CALL_SENSMS);
+                return;
+            }else{
+                //上面已经写好的拨号方法
+                sendSms();
+            }
+        }else {
+            sendSms();
+        }
+
+    }
+
+    private void sendSms(){
         for(Map map:list){
             String phone=(String)map.get("Phone");
             String name=(String)map.get("Name");
             String ensure_text=getIntent().getStringExtra("text");
             String text=name+"同学,"+ensure_text;
             sendSMS(phone,text);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_CALL_SENSMS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    sendSms();
+                } else {
+                    // Permission Denied
+                    Toast.makeText(EnsureSendActivity.this, "无法权限获取，短信发送失败", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 

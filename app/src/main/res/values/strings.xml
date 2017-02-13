@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">短信群发助手</string>
+    <string name="introduce1">短信群发助手是一款能够从Excel文件里面导入通讯录并进行短信群发的软件。</string>
+    <string name="introduce2">请确认已允许本App获得短信发送权限。</string>
+    <string name="introduce3">点击“选择文件”，选择包含通讯录Excel文件，软件将会 :</string>
+    <string name="introduce4">· 从列名为“姓名”或“名字”的列当中提取出姓名文本</string>
+    <string name="introduce5">· 从列名为“电话”、“联系电话”、“电话号码”、“手机”或“手机号码”的列当中提取出手机号码文本</string>
+    <string name="ps">注意 :</string>
+    <string name="ps1">仅支持2003及以前的Excel文件的读取，即后缀名为.xls的文件</string>
+    <string name="maker">作者 :</string>
+    <string name="maker_name">Ericwyn  (Ericwyn.chen@gmail.com)</string>
+    <string name="bug">BUG汇报 :</string>
+    <string name="bug_webSite">Issues</string>
+    <string name="btn_main">选择文件</string>
+    <string name="tv_haveChosseHini_context">已选择</string>
+    <string name="tv_fengge_context">/</string>
+    <string name="btn_send_context">确认选择</string>
+
 </resources>
