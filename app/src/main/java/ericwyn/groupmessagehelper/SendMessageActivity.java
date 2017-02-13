@@ -12,10 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SendMessageActivity extends AppCompatActivity {
+public class SendMessageActivity extends AppCompatActivity {;
     private List<Map<String,Object>> list;
     private TextView haveChooseNum;
     private Button btn_chanceSendName;
@@ -23,14 +24,20 @@ public class SendMessageActivity extends AppCompatActivity {
     private EditText mEditText;
     private TextView tv_textNumHaveInput;
     private TextView tv_messageMax;
+    private TextView tv_nameShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message);
+
         list=ContextActivity.getChooseNameList();
+
         tv_textNumHaveInput=(TextView)findViewById(R.id.tv_textNumHaveInput_sendMActivity);
         tv_messageMax=(TextView)findViewById(R.id.tv_textNumHini_sendMActivity);
+        tv_nameShow=(TextView)findViewById(R.id.tv_nameChooseShow_sendMessageActivity);
+        tv_nameShow.setText((String)((HashMap)list.get(0)).get("Name")+"同学,");
+
         haveChooseNum=(TextView)findViewById(R.id.haveChooseNum_sendMessageActivity);
         haveChooseNum.setText("已选择了"+list.size()+"个联系人");
         btn_chanceSendName=(Button)findViewById(R.id.btn_chanceSendName_sendMessageActivity);
@@ -48,7 +55,6 @@ public class SendMessageActivity extends AppCompatActivity {
                 sendMessage();
             }
         });
-
 
         SharedPreferences sp=getSharedPreferences("data",MODE_PRIVATE);
         if(!sp.getString("saveMessageText","000").equals("000")){
@@ -81,6 +87,7 @@ public class SendMessageActivity extends AppCompatActivity {
 
     }
     private int calculateLength(String etstring) {
+        etstring=etstring+"陈潇桐同学,";
         char[] ch = etstring.toCharArray();
 
         int varlength = 0;
@@ -101,7 +108,6 @@ public class SendMessageActivity extends AppCompatActivity {
     private void sendMessage(){
         Bundle bundle=new Bundle();
         bundle.putString("text",mEditText.getText().toString());
-        bundle.putInt("money",Integer.parseInt(tv_messageMax.getText().toString()));
         Intent intent=new Intent(SendMessageActivity.this,EnsureSendActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
