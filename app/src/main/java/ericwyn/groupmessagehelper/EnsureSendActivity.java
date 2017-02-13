@@ -50,7 +50,7 @@ public class EnsureSendActivity extends AppCompatActivity {
         ensureSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                ensureSend();
             }
         });
     }
@@ -72,4 +72,29 @@ public class EnsureSendActivity extends AppCompatActivity {
         // varlength = etstring.getBytes(CharSet.forName("GBK")).lenght;// 编码根据自己的需求，注意u8中文占3个字节...
         return varlength;
     }
+
+    /**
+     * 调用系统发短信的接口
+     * @param phoneNumber 电话号码
+     * @param message   短信内容
+     */
+    private void sendSMS(String phoneNumber, String message) {
+        // 获取短信管理器
+        android.telephony.SmsManager smsManager = android.telephony.SmsManager.getDefault();
+        // 拆分短信内容（手机短信长度限制）
+        List<String> divideContents = smsManager.divideMessage(message);
+        for (String text : divideContents) {
+            smsManager.sendTextMessage(phoneNumber, null, text, null, null);
+        }
+    }
+    private void ensureSend(){
+        for(Map map:list){
+            String phone=(String)map.get("Phone");
+            String name=(String)map.get("Name");
+            String ensure_text=getIntent().getStringExtra("text");
+            String text=name+"同学,"+ensure_text;
+            sendSMS(phone,text);
+        }
+    }
+
 }

@@ -102,7 +102,6 @@ public class FileUtils {
                     Map<String,Object> map=new HashMap<>();
                     map.put("Name",sheet.getCell(colsOfName,i1).getContents());
                     map.put("Phone",sheet.getCell(colsOfNum,i2).getContents());
-                    map.put("haveChoose","1");
                     Log.i("File操作日志",sheet.getCell(colsOfName,i1).getContents()+sheet.getCell(colsOfNum,i2).getContents());
                     data.add(map);
                 }
