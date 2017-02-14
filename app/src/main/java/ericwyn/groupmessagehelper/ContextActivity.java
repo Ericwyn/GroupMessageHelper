@@ -32,7 +32,6 @@ public class ContextActivity extends AppCompatActivity{
     private TextView haveChoose;
     private TextView numOfContext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,4 +136,5 @@ public class ContextActivity extends AppCompatActivity{
         }
         return listToSend;
     }
+
 }

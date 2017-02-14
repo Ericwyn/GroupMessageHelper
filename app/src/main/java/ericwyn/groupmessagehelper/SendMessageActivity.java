@@ -122,4 +122,5 @@ public class SendMessageActivity extends AppCompatActivity {;
         editor.putString("saveMessageText",mEditText.getText().toString());
         editor.apply();
     }
+
 }

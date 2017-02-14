@@ -1,8 +1,13 @@
 package ericwyn.groupmessagehelper;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,15 +20,23 @@ public class MainActivity extends AppCompatActivity {
     private TextView issues;
     public final int FILE_SELECT_CODE=10086;
     public String EXCEL_PATH="";
+    private final int REQUEST_CODE_ASK_CALL_READEXCEL=10010;
+    private boolean canReadXls=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        canread();
         choose_btn=(Button)findViewById(R.id.btn_main_choose);
         choose_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFileChooser();
+                if(canReadXls){
+                    showFileChooser();
+                }else {
+                    Toast.makeText(MainActivity.this,"请给予内存访问权限以读取Excel文件",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -75,6 +88,40 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void canread(){
+        if(Build.VERSION.SDK_INT >= 23){
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE_ASK_CALL_READEXCEL);
+                return;
+            }else{
+                //上面已经写好的拨号方法
+                canReadXls=true;
+            }
+        }else {
+            canReadXls=true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_CALL_READEXCEL:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    canReadXls=true;
+                } else {
+                    // Permission Denied
+                    Toast.makeText(MainActivity.this, "请给予内存访问权限以读取Excel文件", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
 
