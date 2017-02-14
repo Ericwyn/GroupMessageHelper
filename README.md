@@ -11,3 +11,8 @@
 ##注意
 - 支持安卓版本最低为Android5.1
 - 仅支持Excel 2003及之前的Excel文件（即后缀名为.xls的文件）
+
+##发布
+###v1.0 [点击下载](https://github.com/Ericwyn/GroupMessageHelper/releases/download/v1.0/app-release-v1.0.apk)
+- 实现了全部的基本功能
+- 在Android5.1（MX5 with bugme6.0）、Android6.0（Moto x2）、Android7.0（Android Emulator）上面测试通过
